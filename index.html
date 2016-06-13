@@ -7,15 +7,28 @@
 	<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
 </head>
 <body>
+	<button id="restart"> Restart trivia </button>
 	<button id="start"> Start trivia </button>
-
+	<p id="info"> </p>
 	<div class="questions">
 		<p id="question"> </p>
 		<div class="choices"> 
-			<div id= "choice1"> </div> 
-			<div id= "choice2"> </div> 
-			<div id= "choice3">  </div> 
-			<div id= "choice4">  </div>  
+			<div >
+			 	<button class="btnChoice" id="1"> A </button> 
+			 	<p id= "choice1"> </p>
+			 </div> 
+			<div >  
+				<button class="btnChoice"  id="2"> B</button>
+				<p id= "choice2"> </p>
+			</div> 
+			<div >  
+				<button class="btnChoice" id="3"> C </button>
+				<p id= "choice3"> </p>
+			</div> 
+			<div >  
+			<button class="btnChoice" id="4"> D </button>
+			<p id= "choice4"> </p>
+			</div>  
 		</div>
 	</div>
 	<script type="text/javascript" src="assets/javascript/app.js"></script>	
