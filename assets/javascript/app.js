@@ -2,10 +2,9 @@ $(document).ready(function(){
 	$('.questions').hide();
 	$('#info').hide();
 	$('#restart').hide();
-	var timer; 
 	var correct = 0;
 	var wrong = 0;
-	var  currentQ = {
+	var currentQ = {
 		question:" ",
 		right: " ",
 		choices:[], 
@@ -28,20 +27,56 @@ $(document).ready(function(){
 
 		}
 	]
+	 var clock = {
+		time: 20,
+		int1:0,
+		int2:0,
+		reset:function() {
+			clock.time = 20; 
+			$('#timerem').html(clock.time);
+		},
+		count: function() {
+			clock.time--;
+			$('#timerem').html(clock.time);
+		},
+		start:function() {
+			int1 = setInterval(clock.count, 1000);
+			int2 = setTimeout(clock.out, 20000);
+		},
+		stop: function (){
+			clearInterval(int1);
+			clearTimeout(int2);
+		},
+		out: function() {
+			clock.stop();
+			$('#info').show();
+			$('#info').html('wrong! the correct answer was ' + currentQ.right + '!');
+			$('.questions').hide();
+			wrong++;
+			setTimeout(setQuestion, 3000);
+			
+		}
+
+
+	}
+
+
 	function setQuestion () {
-		//timer.start();
 		$('#restart').hide();
 		if(r < questions.length){
-		$('#info').hide();
-		$('.questions').show();
-		currentQ = questions[r];
-		console.log(currentQ);
-		$('#question').html(currentQ.question);
-		for(i=0; i<currentQ.choices.length; i++){
-			$('#choice'+ parseInt(i+1)).html( currentQ.choices[i]);
-			$('#'+ parseInt(i+1)).attr('value', currentQ.choices[i]);
-		}
+			clock.reset();
+			clock.start();
+			$('#info').hide();
+			$('.questions').show();
+			currentQ = questions[r];
+			console.log(currentQ);
+			$('#question').html(currentQ.question);
+				for(i=0; i<currentQ.choices.length; i++){
+					$('#choice'+ parseInt(i+1)).html( currentQ.choices[i]);
+					$('#'+ parseInt(i+1)).attr('value', currentQ.choices[i]);
+			}
 		r++; 
+
 		} else {
 		$('.questions').hide();
 		$('#info').show();
@@ -50,8 +85,7 @@ $(document).ready(function(){
 		}
 
 	}; 
-	
-
+	 
 	$('#start').on('click', function(){
 		$('#start').hide();
 		setQuestion();	
@@ -72,12 +106,14 @@ $(document).ready(function(){
 			$('#info').show();
 			$('#info').html('correct!')
 			$('.questions').hide();;
+			clock.stop();
 			setTimeout(setQuestion, 3000);
 			correct++;
 		}  else {
 			$('#info').show();
-			$('#info').html('wrong! the correct answer was' + currentQ.right + '!');
+			$('#info').html('wrong! the correct answer was ' + currentQ.right + '!');
 			$('.questions').hide();
+			clock.stop();
 			setTimeout(setQuestion, 3000);
 			wrong++;
 		}
