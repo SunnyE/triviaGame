@@ -9,7 +9,8 @@ $(document).ready(function(){
 		right: " ",
 		choices:[], 
 	}
-	var background = new audio("assets/audio/background.mp3");
+	var background = new Audio("assets/audio/background.mp3");
+	var what = new Audio("assets/audio/what.mp3");
 	background.play();
 	var r = 0;
 	var guess;
@@ -85,6 +86,7 @@ $(document).ready(function(){
 			$('.info').show();
 			$('#info').html('wrong! the correct answer was ' + currentQ.right + '!');
 			$('.questions').hide();
+			what.play();
 			wrong++;
 			setTimeout(setQuestion, 3000);
 			
@@ -141,6 +143,8 @@ $(document).ready(function(){
 			$('.questions').hide();;
 			clock.stop();
 			setTimeout(setQuestion, 3000);
+			var right = new Audio("assets/audio/right.mp3");
+			right.play();
 			correct++;
 		}  else {
 			$('.info').show();
@@ -148,6 +152,7 @@ $(document).ready(function(){
 			$('.questions').hide();
 			clock.stop();
 			setTimeout(setQuestion, 3000);
+			what.play();
 			wrong++;
 		}
 	}); 
