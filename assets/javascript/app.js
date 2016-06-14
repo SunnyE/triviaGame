@@ -9,6 +9,8 @@ $(document).ready(function(){
 		right: " ",
 		choices:[], 
 	}
+	var background = new audio("assets/audio/background.mp3");
+	background.play();
 	var r = 0;
 	var guess;
 	var questions = [
